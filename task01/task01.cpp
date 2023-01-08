@@ -1,6 +1,6 @@
 #include <iostream>
-#include "Eigen/Core"
 #include <cmath>
+#include "Eigen/Core"
 
 
 Eigen::Vector2f twoDimAffineTransformation(const Eigen::Vector2f &point) {
@@ -10,15 +10,15 @@ Eigen::Vector2f twoDimAffineTransformation(const Eigen::Vector2f &point) {
     // rotate 45°
     Eigen::Matrix3f rot45;
     rot45 << (float)cos(std::numbers::pi/4), -(float)sin(std::numbers::pi/4), 0,
-            (float)sin(std::numbers::pi/4), (float)cos(std::numbers::pi/4), 0,
-            0, 0, 1;
+             (float)sin(std::numbers::pi/4), (float)cos(std::numbers::pi/4), 0,
+             0, 0, 1;
     homoPoint = rot45 * homoPoint;
 
     // translation
     Eigen::Matrix3f translation;
     translation << 1, 0, 1,
-            0, 1, 2,
-            0, 0, 1;
+                   0, 1, 2,
+                   0, 0, 1;
 
     homoPoint = translation * homoPoint;
     return {homoPoint.x(), homoPoint.y()};
