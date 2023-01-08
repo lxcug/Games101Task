@@ -6,4 +6,4 @@ set(CMAKE_CXX_STANDARD 20)
 include_directories(dependencies)
 
 
-add_executable(task01 task01/task01.cpp)
+add_executable(task0 task0/main.cpp)
