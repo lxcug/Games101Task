@@ -4,7 +4,7 @@
 
 
 Eigen::Vector2f twoDimAffineTransformation(const Eigen::Vector2f &point) {
-    // 将p转化为齐次坐标
+    // convert point to homogeneous coordinates
     Eigen::Vector3f homoPoint = {point.x(), point.y(),1.f};
 
     // rotate 45°
