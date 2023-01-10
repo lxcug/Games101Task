@@ -45,7 +45,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
     // Create the projection matrix for the given parameters.
     // Then return it.
 
-    float top = zNear * (float)tan(eye_fov/180 * MY_PI), bottom = -top;
+    float top = zNear * (float)tan(eye_fov/180 * MY_PI / 2), bottom = -top;
     float right = aspect_ratio * top, left = -right;
 
     // Perspective to orthographic matrix
