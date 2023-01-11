@@ -159,7 +159,7 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
 
                     int buffer_index = get_index(x, y);
                     if(z_interpolated < depth_buf[buffer_index]) {  // if current depth is the min depth
-                        set_pixel({(float)x, (float)y, z_interpolated}, t.getColor());
+                        set_pixel({(float)x, (float)y, 0}, t.getColor());
                         depth_buf[buffer_index] = z_interpolated;
                     }
                 }
