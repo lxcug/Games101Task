@@ -45,28 +45,31 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
     // Create the projection matrix for the given parameters.
     // Then return it.
 
-    float top = zNear * (float)tan(eye_fov/180 * MY_PI / 2), bottom = -top;
+    float top = -zNear * (float)tan(eye_fov/180 * MY_PI / 2), bottom = -top;
     float right = aspect_ratio * top, left = -right;
 
     // Perspective to orthographic matrix
     Eigen::Matrix4f perspToOtrho = Eigen::Matrix4f::Identity();
     perspToOtrho << zNear, 0, 0, 0,
-                  0, zNear, 0, 0,
-                  0, 0, zNear+zFar, zNear*zFar,
-                  0, 0, 1, 0;
+            0, zNear, 0, 0,
+            0, 0, zNear+zFar, -zNear*zFar,
+            0, 0, 1, 0;
 
+    Eigen::Matrix4f orthoScale, orthoTranslate = Eigen::Matrix4f::Identity();
+    orthoScale << 2/(right-left), 0, 0, 0,
+            0, 2/(top-bottom), 0, 0,
+            0, 0, 2/(zNear-zFar), 0,
+            0, 0, 0, 1;
     // orthographic projection matrix
-    Eigen::Matrix4f ortho = Eigen::Matrix4f::Identity();
-    ortho << 2/(right-left), 0, 0, -(left+right)/2,
-             0, 2/(top-bottom), 0, -(bottom+top)/2,
-             0, 0, 2/(zNear-zFar), -(zNear+zFar)/2,
-             0, 0, 0, 1;
+    Eigen::Matrix4f ortho = orthoScale * orthoTranslate;
 
     projection = ortho * perspToOtrho;
     return projection;
 }
 
 Eigen::Matrix4f get_rotation(Vector3f axis, float angle) {
+    // to unit vector
+    axis = axis / sqrt((axis.x()*axis.x() + axis.y()*axis.y() + axis.z()*axis.z()));
     // Tilde matrix 叉乘矩阵
     Eigen::Matrix3f tildeMatrix;
     tildeMatrix << 0, -axis.z(), axis.y(),
@@ -81,7 +84,7 @@ Eigen::Matrix4f get_rotation(Vector3f axis, float angle) {
     // Linear to Affine
     Eigen::Matrix4f affineRotation;
     affineRotation << rotation(0, 0), rotation(0, 1), rotation(0, 2), 0,
-                      rotation(1, 0), rotation(1, 1), rotation(01, 2), 0,
+                      rotation(1, 0), rotation(1, 1), rotation(1, 2), 0,
                       rotation(2, 0), rotation(2, 1), rotation(2, 2), 0,
                       0, 0, 0, 1;
 

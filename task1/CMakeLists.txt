@@ -4,7 +4,7 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 FIND_PACKAGE(OpenCV REQUIRED
-        PATHS dependencies
+        PATHS ../dependencies
         )
 
 include_directories(${OpenCV_INCLUDE_DIRS})
