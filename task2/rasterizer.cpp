@@ -53,14 +53,14 @@ static bool insideTriangle(float x, float y, const Triangle& t)
             );
 
     for(int i = 0; i < 2; i++) {
-        Vector3f point1 = {v[i].x(), v[i].y(), 0};
-        Vector3f point2 = {v[i+1].x(), v[i+1].y(), 0};
-        Vector3f p = {x, y, 0};
+        Vector3f point1 = {v[i].x(), v[i].y(), 0};  // start point
+        Vector3f point2 = {v[i+1].x(), v[i+1].y(), 0};  // end point
+        Vector3f p = {x, y, 0};  // pixel point
 
         Vector3f currentCrossProduct = (p - point1).cross(point2 - point1);
 
         // if the product of two cross product.z() is minus, the point is not inside the Triangle, = 0 stands for the point is on the sides of the Triangle
-        if(firstCrossProduct.z() * currentCrossProduct.z() < 0)
+        if(firstCrossProduct.z() * currentCrossProduct.z() <= 0)
             return false;
     }
     return true;
@@ -128,7 +128,6 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
     bool superSampling = false;
 
     auto v = t.toVector4();
-
     // TODO : Find out the bounding box of current triangle.
     // iterate through the pixel and find if the current pixel is inside the triangle
 
@@ -136,7 +135,7 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
     float xMin = v[0].x() < v[1].x() ? (v[0].x() < v[2].x() ? v[0].x() : v[2].x()) : (v[1].x() < v[2].x() ? v[1].x() : v[2].x());
     float xMax = v[0].x() > v[1].x() ? (v[0].x() > v[2].x() ? v[0].x()+1 : v[2].x()+1) : (v[1].x() > v[2].x() ? v[1].x()+1 : v[2].x()+1);
     float yMin = v[0].y() < v[1].y() ? (v[0].y() < v[2].y() ? v[0].y() : v[2].y()) : (v[1].y() < v[2].y() ? v[1].y() : v[2].y());
-    float yMax = v[0].y() > v[1].y() ? (v[0].y() > v[2].y() ? v[0].y() : v[2].y()) : (v[1].y() > v[2].y() ? v[1].y()+1 : v[2].y()+1);
+    float yMax = v[0].y() > v[1].y() ? (v[0].y() > v[2].y() ? v[0].y()+1 : v[2].y()+1) : (v[1].y() > v[2].y() ? v[1].y()+1 : v[2].y()+1);
 
     // If so, use the following code to get the interpolated z value.
     // auto[alpha, beta, gamma] = computeBarycentric2D((float)pixelX, (float)pixelY, t.v);
