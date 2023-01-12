@@ -69,7 +69,8 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio,
 
 Eigen::Matrix4f get_rotation(Vector3f axis, float angle) {
     // to unit vector
-    axis = axis / sqrt((axis.x()*axis.x() + axis.y()*axis.y() + axis.z()*axis.z()));
+    axis = axis.normalized();
+
     // Tilde matrix 叉乘矩阵
     Eigen::Matrix3f tildeMatrix;
     tildeMatrix << 0, -axis.z(), axis.y(),
