@@ -39,22 +39,21 @@ auto to_vec4(const Eigen::Vector3f& v3, float w = 1.0f)
     return Vector4f(v3.x(), v3.y(), v3.z(), w);
 }
 
-static bool insideTriangle(float x, float y, const Triangle& t)
+static bool insideTriangle(float x, float y, const Vector3f* _v)
 {
     // TODO : Implement this function to check if the point (x, y) is inside the triangle represented by _v[0], _v[1], _v[2]
-    auto v = t.toVector4();
 
     // Cross product of vec(point2->pixel point) and vec(point2->point0)
     // Here we don't need z, cause we just put the point in a 2D plain, the depth is not necessary
     // From another aspect, we just use the z of cross product which is only relevant to x and y of the two initial vectors
     Vector3f firstCrossProduct  =
-            (Vector3f(x, y, 0) - Vector3f(v[2].x(), v[2].y(), 0)).cross(
-                    Vector3f(v[0].x(), v[0].y(), 0) - Vector3f(v[2].x(), v[2].y(), 0)
+            (Vector3f(x, y, 0) - Vector3f(_v[2].x(), _v[2].y(), 0)).cross(
+                    Vector3f(_v[0].x(), _v[0].y(), 0) - Vector3f(_v[2].x(), _v[2].y(), 0)
             );
 
     for(int i = 0; i < 2; i++) {
-        Vector3f point1 = {v[i].x(), v[i].y(), 0};  // start point
-        Vector3f point2 = {v[i+1].x(), v[i+1].y(), 0};  // end point
+        Vector3f point1 = {_v[i].x(), _v[i].y(), 0};  // start point
+        Vector3f point2 = {_v[i + 1].x(), _v[i + 1].y(), 0};  // end point
         Vector3f p = {x, y, 0};  // pixel point
 
         Vector3f currentCrossProduct = (p - point1).cross(point2 - point1);
@@ -149,7 +148,7 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
         // Rasterization
         for(int x = (int)xMin; x < (int)xMax; x++) {
             for(int y = (int)yMin; y < (int)yMax; y++) {
-                if(insideTriangle((float)(x + 0.5), (float)(y + 0.5), t)) {
+                if(insideTriangle((float)(x + 0.5), (float)(y + 0.5), t.v)) {
                     // interpolation
                     auto[alpha, beta, gamma] = computeBarycentric2D((float)x, (float)y, t.v);
                     float w_reciprocal = 1.0/(alpha / v[0].w() + beta / v[1].w() + gamma / v[2].w());
@@ -177,7 +176,7 @@ void rst::rasterizer::rasterize_triangle(const Triangle& t) {
 
                 bool hasSamplePointInside = false;  // at least one sample point is inside the Triangle
                 for(auto & samplePoint : samplePoints) {  // loop to judge whether the sample point is inside, and calculate depth as well
-                    if(insideTriangle(samplePoint.x(), samplePoint.y(), t)) {
+                    if(insideTriangle(samplePoint.x(), samplePoint.y(), t.v)) {
                         hasSamplePointInside = true;
                         samplePoint.w() = 1;
                     }

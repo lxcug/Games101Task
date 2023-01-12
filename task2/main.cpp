@@ -55,6 +55,7 @@ Eigen::Matrix4f get_projection_matrix(float eye_fov, float aspect_ratio, float z
     return projection;
 }
 
+
 int main(int argc, const char** argv)
 {
     float angle = 0;
