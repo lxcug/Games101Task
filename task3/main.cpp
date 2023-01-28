@@ -230,7 +230,7 @@ Eigen::Vector3f displacement_fragment_shader(const fragment_shader_payload& payl
     // Vector ln = (-dU, -dV, 1)
     // Position p = p + kn * n * h(u,v)
     // Normal n = normalize(TBN * ln)
-    float x = normal.x(), y = normal.y(), z = normal.z();
+    float x = normal.x(), y =  normal.y(), z = normal.z();
     Vector3f n = normal;
     Vector3f t = {x*y/sqrt(x*x+z*z), sqrt(x*x+z*z), z*y/sqrt(x*x+z*z)};
     Vector3f b = n.cross(t);
@@ -352,7 +352,7 @@ int main(int argc, const char** argv)
         for(int i=0;i<mesh.Vertices.size();i+=3)
         {
             Triangle* t = new Triangle();
-            for(int j=0;j<3;j++)
+            for(int j=0; j<3; j++)
             {
                 t->setVertex(j,Vector4f(mesh.Vertices[i+j].Position.X,mesh.Vertices[i+j].Position.Y,mesh.Vertices[i+j].Position.Z,1.0));
                 t->setNormal(j,Vector3f(mesh.Vertices[i+j].Normal.X,mesh.Vertices[i+j].Normal.Y,mesh.Vertices[i+j].Normal.Z));
