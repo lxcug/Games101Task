@@ -67,3 +67,10 @@
 > Displacement mapping
 >
 > <img src="https://raw.githubusercontent.com/lxcug/imgs/main/imgs20230113005708.png" style="zoom:50%;" />
+
+## task4
+
+> 
+>
+> <img src="https://raw.githubusercontent.com/lxcug/imgs/main/imgs20230128143723.png" style="zoom:50%;" />
+
