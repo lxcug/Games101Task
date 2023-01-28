@@ -50,7 +50,7 @@ cv::Point2f recursive_bezier(const std::vector<cv::Point2f> &control_points, flo
 void bezier(const std::vector<cv::Point2f> &control_points, cv::Mat &window)
 {
     // TODO: Iterate through all t = 0 to t = 1 with small steps, and call de Casteljau's 
-    // recursive Bezier algorithm.
+    // recurisve Bezier algorithm.
     int indent[][2] = {{0, 1}, {0, -1}, {1, 0}, {-1, 1},};
     for (double t = 0.0; t <= 1.0; t += 0.001)
     {
