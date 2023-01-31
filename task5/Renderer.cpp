@@ -236,8 +236,7 @@ void Renderer::Render(const Scene& scene)
 
             // x = nx * right/zNear   scale = tan(fov/2) = top/zNear  imageAspectRatio = right/top  right/zNear = scale * imageAspectRatio
             // y = ny * top/zNear = ny * scale
-
-            // NDC Space to World Space
+            // NDC Space to Camera Space
             x = nx * scale * imageAspectRatio;
             y = -ny * scale;
 
