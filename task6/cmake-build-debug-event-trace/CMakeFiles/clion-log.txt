@@ -1,0 +1,4 @@
+B:\cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=D:/1 installation path/CLion 2022.2.3/bin/ninja/win/ninja.exe" --profiling-format=google-trace --profiling-output=CMakeFiles\clion-event-trace.json -G Ninja -S E:\Games101\task6 -B E:\Games101\task6\cmake-build-debug-event-trace
+-- Configuring done
+-- Generating done
+-- Build files have been written to: E:/Games101/task6/cmake-build-debug-event-trace
