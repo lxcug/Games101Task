@@ -26,7 +26,9 @@ bool rayTriangleIntersect(const Vector3f& v0, const Vector3f& v1, const Vector3f
     if(b1 + b2 > 1.)
         return false;
     // update parameters
-    tnear = t, u = b1, v = b2;
+    tnear = t;
+    u *= b1;
+    v *= b2;
     return true;
 }
 

@@ -232,14 +232,15 @@ void Renderer::Render(const Scene& scene)
 
             // Scene Space to NDC Space
             float nx = (i + 0.5f) * 2 / scene.width - 1.0f;
-            float ny = (j + 0.5f) * 2 / scene.height - 1.0f;
+            float ny = 1.f - (j + 0.5f) * 2 / scene.height;
 
             // x = nx * right/zNear   scale = tan(fov/2) = top/zNear  imageAspectRatio = right/top  right/zNear = scale * imageAspectRatio
             // y = ny * top/zNear = ny * scale
             // NDC Space to Camera Space
             x = nx * scale * imageAspectRatio;
-            y = -ny * scale;
+            y = ny * scale;
 
+            // here zz=-1, cause abs(zNear)(distance of camera and near clip) is always 1, and the camera is look at -z
             Vector3f dir = normalize(Vector3f(x, y, -1)); // Don't forget to normalize this direction!
             framebuffer[m++] = castRay(eye_pos, dir, scene, 0);
         }
