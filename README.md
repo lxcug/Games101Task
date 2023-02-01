@@ -115,3 +115,14 @@ Model Space$\stackrel{model\ transformation}\longrightarrow$World Space$\stackre
 
 
 > <img src="https://raw.githubusercontent.com/lxcug/imgs/main/imgs20230131151643.png" style="zoom:50%;" />
+
+## task6
+
+> <img src="https://raw.githubusercontent.com/lxcug/imgs/main/imgs20230202001019.png" style="zoom:67%;" />
+
+
+
+
+
+
+
