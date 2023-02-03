@@ -218,10 +218,10 @@ inline Intersection Triangle::getIntersection(Ray ray)
     float t = coeff * dotProduct(S2, E2);
     float u = coeff * dotProduct(S1, S);
     float v = coeff * dotProduct(S2, ray.direction);
-    if(t >= 0 && u >= 0 && v >= 0 && u+v <= 1) {
+    if(t > 0 && u >= 0 && v >= 0 && u+v <= 1) {
         inter.happened = true;
         inter.normal = normal;
-        inter.coords = {t, u, v};
+        inter.coords = ray(t);
         inter.distance = t;
         inter.m = m;
         inter.obj = this;
