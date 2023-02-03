@@ -120,9 +120,11 @@ Model Space$\stackrel{model\ transformation}\longrightarrow$World Space$\stackre
 
 > <img src="https://raw.githubusercontent.com/lxcug/imgs/main/imgs20230202001019.png" style="zoom:67%;" />
 
+## task7
 
-
-
+> spp = 1024
+>
+> ![](https://raw.githubusercontent.com/lxcug/imgs/main/imgs20230203233945.png)
 
 
 
