@@ -125,6 +125,10 @@ Model Space$\stackrel{model\ transformation}\longrightarrow$World Space$\stackre
 > spp = 1024
 >
 > ![](https://raw.githubusercontent.com/lxcug/imgs/main/imgs20230203233945.png)
+>
+> spp = 2048
+>
+> ![](https://raw.githubusercontent.com/lxcug/imgs/main/imgs20230205101732.png)
 
 
 
