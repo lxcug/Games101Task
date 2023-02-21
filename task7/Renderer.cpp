@@ -25,12 +25,11 @@ void run(int low, int high, const Scene& scene, int spp, std::vector<Vector3f>& 
     for (int i = low; i < high; ++i) {
         for (int j = 0; j < scene.width; ++j) {
             for (int k = 0; k < spp; k++){
-                float x = get_random_float();
-                float y = get_random_float();
-                float _x = (2 * (j + x) / (float)scene.width - 1) *
+                float xPerturbation = get_random_float(), yPerturbation = get_random_float();
+                float x = (2 * (j + xPerturbation) / (float)scene.width - 1) *
                            imageAspectRatio * scale;
-                float _y = (1 - 2 * (i + y) / (float)scene.height) * scale;
-                Vector3f dir = normalize(Vector3f(-_x, _y, 1));
+                float y = (1 - 2 * (i + yPerturbation) / (float)scene.height) * scale;
+                Vector3f dir = normalize(Vector3f(-x, y, 1));
                 Ray ray = Ray(eye_pos, dir);
                 framebuffer[i*scene.width + j] += scene.castRay(ray, 0) / spp;
             }
@@ -49,11 +48,11 @@ void Renderer::Render(const Scene& scene)
 {
     std::vector<Vector3f> framebuffer(scene.width * scene.height);
 
-    // change the spp value to change sample ammount
-    int spp = 1024;
+    // change the spp value to change sample amount
+    int spp = 32;
     std::cout << "SPP: " << spp << "\n";
 
-    int numThreads = std::thread::hardware_concurrency();
+    int numThreads = (int)std::thread::hardware_concurrency();
     int lines = scene.height / numThreads + 1;
     std::vector<std::thread> threads;
     for(int i = 0; i < numThreads; i++) {
