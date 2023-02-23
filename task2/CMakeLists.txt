@@ -4,10 +4,11 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 FIND_PACKAGE(OpenCV REQUIRED
-        PATHS ../dependencies
+        PATHS ../dependencies/OpenCV2
         )
 include_directories(${OpenCV_INCLUDE_DIRS})
-find_package(Eigen3 REQUIRED)
+find_package(Eigen3 REQUIRED
+        PATHS ../dependencies/Eigen3)
 include_directories(${EIGEN3_INCLUDE_DIRS})
 
 
