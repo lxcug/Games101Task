@@ -11,7 +11,6 @@ find_package(Eigen3 REQUIRED
         PATHS ../dependencies/Eigen3)
 include_directories(${EIGEN3_INCLUDE_DIRS})
 
-
 add_executable(Rasterizer main.cpp rasterizer.hpp rasterizer.cpp Triangle.hpp Triangle.cpp global.hpp)
 
 target_link_libraries(Rasterizer
