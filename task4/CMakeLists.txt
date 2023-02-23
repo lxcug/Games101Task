@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.10)
 project(BezierCurve)
 
 find_package(OpenCV REQUIRED
-        PATHS ../dependencies
+        PATHS ../dependencies/OpenCV2
         )
 
 set(CMAKE_CXX_STANDARD 17)
